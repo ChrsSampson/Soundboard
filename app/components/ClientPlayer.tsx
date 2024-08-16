@@ -5,6 +5,7 @@ import Input from "./ui/Input";
 type Props = {
     audio: string;
     name?: string;
+    ok?: boolean;
 };
 
 export default function ClientPlayer({ audio, name }: Props) {
@@ -89,7 +90,12 @@ export default function ClientPlayer({ audio, name }: Props) {
                 </div>
             </div>
             <Slider label="volume" value={volume} onChange={handleVolume} />
-            <Slider disabled={true} value={time} onChange={() => {}} max={ref.current.duration} />
+            <Slider
+                disabled={true}
+                value={time}
+                onChange={() => {}}
+                max={ref.current.duration}
+            />
         </section>
     );
 }
