@@ -1,5 +1,7 @@
 node_modules
 
+public/sounds/rainy_day.mp3
+
 /.cache
 /build
 .env
