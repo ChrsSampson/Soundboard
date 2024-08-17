@@ -15,6 +15,9 @@ export default function ClientPlayer({ audio, name }: Props) {
     const [loop, setLoop] = useState<boolean>(false);
     const [duration, setDuration] = useState<number>(0);
     const [time, setTime] = useState<number>(ref.current.currentTime);
+    const [inter, setInter] = useState<number>(5);
+    const [intervalEnabled, setIntervalEnabled] = useState<boolean>(false);
+    const [timer, setTimer] = useState<number | null>(null);
 
     function handlePlay() {
         ref.current.play();
@@ -42,6 +45,27 @@ export default function ClientPlayer({ audio, name }: Props) {
     function handleLoop() {
         setLoop(!loop);
         ref.current.loop = !loop;
+    }
+
+    function handleInterval(time: number) {
+        const totalTime = duration + time;
+
+        const t = setInterval((id) => {
+            console.log("hello");
+            handlePlay();
+        }, totalTime);
+
+        setTimer(t);
+    }
+
+    function toggleInterval() {
+        if (intervalEnabled) {
+            setIntervalEnabled(true);
+            handleInterval(time);
+        } else if (timer) {
+            clearInterval(timer);
+            setIntervalEnabled(false);
+        }
     }
 
     function formatDuration() {
@@ -89,6 +113,24 @@ export default function ClientPlayer({ audio, name }: Props) {
                     />
                 </div>
             </div>
+            <div className="flex place-items-center">
+                <Input
+                    type="number"
+                    label="Repeat (seconds)"
+                    value={inter}
+                    onChange={setInter}
+                    disable={intervalEnabled ? true : false}
+                />
+                <Input
+                    className="size-10 mt-8"
+                    type="checkbox"
+                    value={intervalEnabled}
+                    onChange={() => {
+                        toggleInterval();
+                    }}
+                />
+            </div>
+            <h3 className="text-lg">Status: {play ? "Playing" : "Waiting"}</h3>
             <Slider label="volume" value={volume} onChange={handleVolume} />
             <Slider
                 disabled={true}

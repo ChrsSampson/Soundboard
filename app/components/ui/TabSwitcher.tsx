@@ -1,5 +1,6 @@
 import Player from "../Player";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useId } from "react";
 
 type TabStruct = {
     name: string;
@@ -11,14 +12,21 @@ type DataStruct = {
     sounds: TabStruct[];
 };
 
+function getId() {
+    return Math.floor(Math.random() * 1001231);
+}
+
 export default function TabSwitcher({ pages }: { pages: any }) {
     const [index, setIndex] = useState<number>(0);
+    const [currentItems, setCurrentItems] = useState(pages[index]);
 
-    const currentItems = pages[index];
+    useEffect(() => {
+        setCurrentItems(pages[index]);
+    }, [index]);
 
     return (
         <section>
-            <div className="flex ">
+            <div className="flex gap-1">
                 {/* tab buttons */}
                 {pages &&
                     pages.map((item, i) => {
@@ -26,7 +34,7 @@ export default function TabSwitcher({ pages }: { pages: any }) {
                             <Tab
                                 active={index == i ? true : false}
                                 onClick={() => setIndex(i)}
-                                key={item.name + i}
+                                key={useId()}
                                 tabName={item.name}
                             />
                         );
@@ -71,10 +79,16 @@ function TabPage({ items }: PageProps) {
     }
 
     return (
-        <section className="grid grid-cols-2 bg-slate-700 gap-4  auto-rows-auto">
+        <section className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-slate-700 gap-4  auto-rows-auto">
             {items &&
                 items.map((thing) => {
-                    return <Player name={thing.name} audio={thing.path} />;
+                    return (
+                        <Player
+                            key={getId()}
+                            name={thing.name}
+                            audio={thing.path}
+                        />
+                    );
                 })}
         </section>
     );

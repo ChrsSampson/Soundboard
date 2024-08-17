@@ -26,7 +26,9 @@ export default function Input(props: InputProps) {
             <input
                 name={props.name}
                 placeholder={props.placeholder}
-                autoComplete={props.autocomplete ? String(props.autocomplete) : "false"}
+                autoComplete={
+                    props.autocomplete ? String(props.autocomplete) : "false"
+                }
                 disabled={props.disable}
                 className={
                     props.className
@@ -37,7 +39,7 @@ export default function Input(props: InputProps) {
                 value={props.value}
                 onChange={(e) => props.onChange(e.target.value)}
                 min={props.min}
-                max={props.max}
+                max={props.max && props.max}
                 step={props.step}
                 checked={props.checked}
             />

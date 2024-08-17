@@ -15,11 +15,28 @@ type DataStruct = {
 
 const testTabs: DataStruct[] = [
     {
+        name: "Setup Sounds",
+        sounds: [
+            {
+                name: "Strange Begining",
+                path: "/sounds/strange.mp3",
+            },
+        ],
+    },
+    {
         name: "On the Road",
         sounds: [
             {
                 name: "Horse with cart",
                 path: "/sounds/horse_with_cart.mp3",
+            },
+            {
+                name: "Rain",
+                path: "/sounds/rain.mp3",
+            },
+            {
+                name: "Thunder",
+                path: "/sounds/thunder.mp3",
             },
             {
                 name: "Neigh",
@@ -29,7 +46,33 @@ const testTabs: DataStruct[] = [
     },
     {
         name: "Manor",
-        sounds: [],
+        sounds: [
+            {
+                name: "Gloom",
+                path: "/sounds/gloomy.mp3",
+            },
+            {
+                name: "Spooky Time",
+                path: "/sounds/tense.mp3",
+            },
+            {
+                name: "Creeking",
+                path: "/sounds/creeking.mp3",
+            },
+        ],
+    },
+    {
+        name: "Real Spooky",
+        sounds: [
+            {
+                name: "Tense",
+                path: "/sounds/tense.mp3",
+            },
+            {
+                name: "Ghosts Enter",
+                path: "/sounds/ghosts.mp3",
+            },
+        ],
     },
 ];
 
@@ -38,7 +81,6 @@ export default function Soundboard() {
 
     return (
         <section>
-            <h1>Soundboard</h1>
             <div>
                 <TabSwitcher pages={tabs} />
             </div>

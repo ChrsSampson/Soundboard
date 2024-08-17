@@ -14,7 +14,8 @@ export default function Button(props: ButtonProps) {
         };
 
     function getStyle() {
-        const baseStyle = "text-center rounded px-[1em] py-[.5em] hover:text-slate-200";
+        const baseStyle =
+            "text-center rounded px-[2em] py-[.75em] hover:text-slate-200";
 
         // the trailing spaces are important here
         const submitStyle = "bg-blue-500 hover:bg-blue-600 ";
@@ -22,7 +23,8 @@ export default function Button(props: ButtonProps) {
         const dangerStyle = "bg-red-500 hover:bg-red-700 ";
         const warnStyle = "bg-yellow-500 hover:bg-yellow-700 ";
         // override the interactive styles
-        const normalDisabled = "bg-slate-300 text-slate-400 hover:text-slate-400 ";
+        const normalDisabled =
+            "bg-slate-300 text-slate-400 hover:text-slate-400 ";
 
         switch (props.variant) {
             case "submit":
